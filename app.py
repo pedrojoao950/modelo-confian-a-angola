@@ -16,10 +16,51 @@ O objetivo é prever a confiança nas instituições públicas (Presidência, Pa
 """)
 
 # Carregamento de dados
-st.subheader("Visualização dos Dados (exemplo)")
+st.subheader("Visualização dos Dados (com filtros interativos)")
 try:
     df = pd.read_excel("data/angola_afrobarometro_r10.xlsx")
-    st.dataframe(df.head())
+
+    # Filtros interativos na barra lateral
+    st.sidebar.header("🔎 Filtros Interativos")
+
+    # Gênero
+    genero_map = {1: "Masculino", 2: "Feminino"}
+    genero_opcao = st.sidebar.selectbox("Gênero", options=["Todos"] + list(genero_map.values()))
+    if genero_opcao != "Todos":
+        genero_cod = [k for k, v in genero_map.items() if v == genero_opcao][0]
+        df = df[df["Q1"] == genero_cod]
+
+    # Idade
+    if "Q2" in df.columns:
+        idade_min = int(df["Q2"].min())
+        idade_max = int(df["Q2"].max())
+        idade_sel = st.sidebar.slider("Faixa Etária", idade_min, idade_max, (idade_min, idade_max))
+        df = df[(df["Q2"] >= idade_sel[0]) & (df["Q2"] <= idade_sel[1])]
+
+    # Escolaridade
+    if "Q3" in df.columns:
+        escolaridades = df["Q3"].dropna().unique()
+        escolaridade_sel = st.sidebar.selectbox("Escolaridade (código)", ["Todos"] + list(map(int, escolaridades)))
+        if escolaridade_sel != "Todos":
+            df = df[df["Q3"] == escolaridade_sel]
+
+    # Região
+    if "REGION" in df.columns:
+        regioes = df["REGION"].dropna().unique()
+        regiao_sel = st.sidebar.selectbox("Região (código)", ["Todas"] + list(regioes))
+        if regiao_sel != "Todas":
+            df = df[df["REGION"] == regiao_sel]
+
+    # Avaliação do Presidente (Q95)
+    if "Q95" in df.columns:
+        avaliacoes = df["Q95"].dropna().unique()
+        avaliacao_sel = st.sidebar.selectbox("Avaliação do Presidente (Q95)", ["Todas"] + list(avaliacoes))
+        if avaliacao_sel != "Todas":
+            df = df[df["Q95"] == avaliacao_sel]
+
+    # Exibir dados filtrados
+    st.dataframe(df.head(20))
+
 except:
     st.warning("Arquivo de dados não encontrado. Certifique-se de que 'angola_afrobarometro_r10.xlsx' está na pasta 'data'.")
 
@@ -69,3 +110,5 @@ Principais variáveis explicativas:
 # Rodapé
 st.markdown("---")
 st.markdown("Desenvolvido com Streamlit | © 2025 Pedro Joao | All Rights Reserved")
+
+
