@@ -16,7 +16,7 @@ O objetivo é prever a confiança nas instituições públicas (Presidência, Pa
 """)
 
 # Carregamento de dados
-st.subheader("Visualização dos Dados")
+st.subheader("Visualização dos Dados (com filtros interativos)")
 try:
     df = pd.read_excel("data/angola_afrobarometro_r10.xlsx")
 
@@ -123,6 +123,5 @@ Principais variáveis explicativas:
 
 # Rodapé
 st.markdown("---")
-st.markdown("Pedro Joao | © 2025")
-
+st.markdown("Desenvolvido com Streamlit | © 2025 Pedro Joao | All Rights Reserved")
 
