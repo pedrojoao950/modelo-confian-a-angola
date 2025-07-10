@@ -16,7 +16,7 @@ O objetivo é prever a confiança nas instituições públicas (Presidência, Pa
 """)
 
 # Carregamento de dados
-st.subheader("Visualização dos Dados (com filtros interativos)")
+st.subheader("Visualização dos Dados")
 try:
     df = pd.read_excel("data/angola_afrobarometro_r10.xlsx")
 
