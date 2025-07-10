@@ -123,6 +123,6 @@ Principais variáveis explicativas:
 
 # Rodapé
 st.markdown("---")
-st.markdown("Pedro Joao | © 2025 All Rights Reserved")
+st.markdown("Pedro Joao | © 2025")
 
 
