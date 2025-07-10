@@ -92,6 +92,20 @@ with cols[2]:
     except:
         st.warning("Imagem 'grafico_q70c.png' não encontrada.")
 
+# Resultados principais
+st.subheader("📊 Principais Resultados do Estudo")
+st.markdown("""
+- A **classe mais previsível** nos três modelos foi "bastante confiança" (classe 4), com F1-score médio superior a 0.57.
+- As **variáveis mais importantes** foram:
+    - Avaliação do presidente (Q95)
+    - Percepção de corrupção (Q60A e Q60B)
+    - Escolaridade (Q3)
+    - Satisfação com a democracia (Q103)
+- As **classes extremas** ("nenhuma confiança" e "muita confiança") apresentaram menor desempenho preditivo.
+- A técnica **SMOTE** foi essencial para equilibrar as classes e melhorar a performance dos modelos Random Forest.
+- O modelo sugere que **atitudes institucionais são fortemente moldadas por percepções políticas e fatores socioeducacionais**.
+""")
+
 # Metodologia
 st.subheader("Resumo da Metodologia")
 st.markdown("""
